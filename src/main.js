@@ -6,6 +6,7 @@ import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import { registerSW } from 'virtual:pwa-register'
 
+import './styles/style.scss'
 // 註冊 service worker 觸發更新
 registerSW({
   onNeedRefresh() { },
