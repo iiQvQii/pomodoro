@@ -38,8 +38,8 @@ export default defineConfig({
         // APP 說明
         description: 'Pomodoro',
         // APP 主題顏色
-        theme_color: '#42b883',
-        background_color: '#42b883',
+        theme_color: '#f1a9a0',
+        background_color: '#f1a9a0',
         // APP 顯示範圍
         scope: './',
         // APP 開始畫面網址

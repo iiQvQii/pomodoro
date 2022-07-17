@@ -10,14 +10,29 @@ v-row.text-center#home
       v-icon mdi-pause
     v-btn.mx-3(icon color="red" v-if="current.length > 0" @click="finishTimer(true)")
       v-icon mdi-skip-next
+  v-col(col="12")
+
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
+import { gsap } from 'gsap'
 import { useListStore } from '@/stores/list'
 import { useSettingsStore } from '@/stores/settings'
+import MorphA from '../components/morphA.vue'
 
+// onMounted(() => {
+//   gsap.to('#morphA', {
+//     background: 'linear-gradient(0deg, rgba(236,132,132,1) 0%, rgba(255,112,163,1) 100%)',
+//     scale: 1.1,
+//     transformOrigin: 'center center',
+//     duration: 3,
+//     yoyo: true,
+//     repeat: -1,
+//     ease: 'steps(12)'
+//   })
+// })
 const list = useListStore()
 const { current, items, timeleft } = storeToRefs(list)
 const { countdown, start, finish } = list
@@ -25,6 +40,7 @@ const { countdown, start, finish } = list
 const settings = useSettingsStore()
 const { selectedAlarmFile } = storeToRefs(settings)
 
+// 顯示文字
 const currentText = computed(() => {
   return current.value.length > 0 ? current.value : items.value.length > 0 ? '點擊開始' : '沒有事項'
 })
@@ -53,6 +69,9 @@ const finishTimer = (skip) => {
     const audio = new Audio()
     audio.src = selectedAlarmFile.value
     audio.play()
+  }
+  if (items.value.length > 0) {
+    startTimer()
   }
 }
 

@@ -5,11 +5,14 @@ v-row#list
   v-col(cols='12')
     v-text-field(
       variant="underlined"
-      v-model="newItem"
       append-icon="mdi-plus"
+      clear-icon="mdi-close-circle"
+      clearable
+      placeholder="請輸入待辦事項"
+      v-model="newItem"
       :rules="[required]"
       @click:append="onInputSubmit"
-      @keydown.enter='onInputSubmit'
+      @keydown.enter="onInputSubmit"
     )
     v-table
       thead
@@ -43,7 +46,7 @@ import { useListStore } from '@/stores/list'
 
 const newItem = ref('')
 const required = value => {
-  return !!value
+  return !!value // true/false message
 }
 
 const list = useListStore()

@@ -7,21 +7,22 @@ export const useListStore = defineStore({
   id: 'list',
   state() {
     return {
-      items: [],
-      finished: [],
-      current: '',
+      items: [], // 未完成 to do
+      finished: [], // 已完成 done
+      current: '', // 正在做 doing
       id: 1,
       break: false,
-      timeleft: time
+      timeleft: time,
+      notify: false
     }
   },
-  actions: {
+  actions: { // 修改state的所有function
     addItem(data) {
       this.items.push({
         id: this.id++,
         name: data,
         edit: false,
-        model: data
+        model: data // 記原本的值
       })
     },
     delItem(i) {
@@ -41,18 +42,40 @@ export const useListStore = defineStore({
     countdown() {
       this.timeleft--
     },
-    start() {
-      this.current = this.items.shift().name
+    start() { // 把items[]裡面的第一個東西放到doing
+      this.current = this.break ? '休息一下' : this.items.shift().name
     },
     finish() {
-      this.finished.push({
-        name: this.current,
-        id: this.id++
+      if (!this.break) {
+        this.finished.push({
+          name: this.current,
+          id: this.id++
+        })
+      }
+      const oldCurrent = this.current
+      const notification = new Notification('事項完成', {
+        body: oldCurrent,
+        icon: 'https://github.com/rogeraabbccdd.png'
       })
       this.current = ''
+      if (this.items.length > 0) {
+        this.break = !this.break
+      }
+      this.timeleft = this.break ? timebreak : time
+    },
+    toggleNotify() {
+      if (!this.notify && 'Notification' in window) {
+        Notification.requestPermission(permission => {
+          if (permission === 'granted') {
+            this.notify = true
+          }
+        })
+      } else {
+        this.notify = false
+      }
     }
   },
   persist: {
-    key: 'pomodoro-fist'
+    key: 'pomodoro-list'
   }
 })
