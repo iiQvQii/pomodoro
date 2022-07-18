@@ -2,7 +2,7 @@
 v-app
   v-card
     v-navigation-drawer(expand-on-hover rail permanent width="180")
-      v-list-item(id="logo" prepend-avatar="../tomato.png")
+      v-list-item(id="logo" prepend-avatar="https://raw.githubusercontent.com/iiQvQii/pomodoro/master/tomato.png")
       v-divider
       v-list(density="compact" nav)
         v-list-item(color="#d03c21" two-line prepend-icon="mdi-timer" title="TIMER" value="TIMER" to='/')
