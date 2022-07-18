@@ -1,14 +1,15 @@
 <template lang="pug">
 v-row#list
   v-col(cols='12')
-    h1 待辦事項
+    .line
+    h1 TO DO LIST
   v-col(cols='12')
     v-text-field(
       variant="underlined"
       append-icon="mdi-plus"
       clear-icon="mdi-close-circle"
       clearable
-      placeholder="請輸入待辦事項"
+      placeholder="Let's write something to do!"
       v-model="newItem"
       :rules="[required]"
       @click:append="onInputSubmit"
@@ -17,11 +18,11 @@ v-row#list
     v-table
       thead
         tr
-          th 名稱
-          th 操作
+          th Title
+          th Edit / Delete
       tbody
         tr(v-if="items.length === 0")
-          td.text-center(colspan="2") 沒有資料
+          td.text-center(colspan="2") NO EVENTS
         tr(v-for="(item, i) in items")
           td
             v-text-field(v-if="item.edit" v-model="item.model" autofocus)

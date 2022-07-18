@@ -2,16 +2,16 @@
 v-row.text-center#home
   v-col(cols="12")
     h1 {{ currentText }}
-    h1 {{ timeText }}
+    h1#time {{ timeText }}
   v-col(cols="12")
-    v-btn.mx-3(icon color="green" v-if="status !== 1" @click="startTimer")
+    v-btn.mx-3(icon v-if="status !== 1" @click="startTimer")
       v-icon mdi-play
-    v-btn.mx-3(icon color="blue" v-else @click="pauseTimer")
+    v-btn.mx-3(icon v-else @click="pauseTimer")
       v-icon mdi-pause
-    v-btn.mx-3(icon color="red" v-if="current.length > 0" @click="finishTimer(true)")
+    v-btn.mx-3(icon v-if="current.length > 0" @click="finishTimer(true)")
       v-icon mdi-skip-next
-  v-col(col="12")
-
+  v-col(cols="12" style="height: 400px;")
+    TomatoImg
 </template>
 
 <script setup>
@@ -20,19 +20,24 @@ import { storeToRefs } from 'pinia'
 import { gsap } from 'gsap'
 import { useListStore } from '@/stores/list'
 import { useSettingsStore } from '@/stores/settings'
-import MorphA from '../components/morphA.vue'
+import TomatoImg from '../components/TomatoImg.vue'
 
-// onMounted(() => {
-//   gsap.to('#morphA', {
-//     background: 'linear-gradient(0deg, rgba(236,132,132,1) 0%, rgba(255,112,163,1) 100%)',
-//     scale: 1.1,
-//     transformOrigin: 'center center',
-//     duration: 3,
-//     yoyo: true,
-//     repeat: -1,
-//     ease: 'steps(12)'
-//   })
-// })
+onMounted(() => {
+  gsap.to('#tomatoA,#tomatoB', {
+    background: 'linear-gradient(0deg, rgba(236,132,132,1) 0%, rgba(255,112,163,1) 100%)',
+    scale: 1.1,
+    transformOrigin: 'center center',
+    duration: 3,
+    yoyo: true,
+    repeat: -1,
+    ease: 'power4'
+  })
+  gsap.from('h1', {
+    y: -100,
+    duration: 1,
+    ease: 'power4'
+  })
+})
 const list = useListStore()
 const { current, items, timeleft } = storeToRefs(list)
 const { countdown, start, finish } = list
@@ -42,7 +47,7 @@ const { selectedAlarmFile } = storeToRefs(settings)
 
 // 顯示文字
 const currentText = computed(() => {
-  return current.value.length > 0 ? current.value : items.value.length > 0 ? '點擊開始' : '沒有事項'
+  return current.value.length > 0 ? current.value : items.value.length > 0 ? 'CLICK TO START' : 'NO EVENTS'
 })
 const timeText = computed(() => {
   const m = Math.floor(timeleft.value / 60).toString().padStart(2, '0')

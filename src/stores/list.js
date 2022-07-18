@@ -55,7 +55,7 @@ export const useListStore = defineStore({
       const oldCurrent = this.current
       const notification = new Notification('事項完成', {
         body: oldCurrent,
-        icon: 'https://github.com/rogeraabbccdd.png'
+        icon: 'https://raw.githubusercontent.com/iiQvQii/pomodoro/master/tomato.png'
       })
       this.current = ''
       if (this.items.length > 0) {

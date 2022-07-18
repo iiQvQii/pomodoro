@@ -1,13 +1,43 @@
 /* google font - MuseoModerno / Baloo Da 2 / Expletus Sans */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Expletus+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=MuseoModerno:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import 'home';
+@import 'list';
+@import 'settings';
 
-
-
-
+// global設定----------------------------
 * {
   // font-family: 'Baloo Da 2', cursive;
   // font-family: 'MuseoModerno', cursive;
   font-family: 'Expletus Sans', cursive;
+  scrollbar-color: #d03c21;
+  letter-spacing: .07rem;
+  --v-border-color: none;
+}
+
+.v-col {
+  position: relative;
+  // text-align: center;
+
+}
+
+h1 {
+  display: inline-block;
+  color: #d03c21;
+  padding: 0 1.5rem;
+}
+
+.line {
+  display: inline-block;
+  width: 5px;
+  height: 40px;
+  background: #d03c21;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+th {
+  border-bottom: thin solid #d03c21;
 }
 
 .v-card {
@@ -15,7 +45,7 @@
 }
 
 .v-navigation-drawer {
-  height: 100vh;
+  height: 100%;
   // border: #d03c21;
 
 }
@@ -24,8 +54,27 @@
   .v-list-item-title {
     font-size: 30px;
     font-weight: bold;
-    letter-spacing: .05rem;
+    letter-spacing: .5rem;
     color: #d03c21;
     font-style: italic;
   }
+}
+
+#content {
+  th {
+    border-bottom: 3px solid #d03c21;
+    font-size: 1rem;
+    padding-bottom: .5rem;
+    font-weight: bolder;
+
+  }
+
+  td {
+    font-size: .9rem;
+    padding: .5rem;
+  }
+}
+
+.v-container {
+  padding: 5rem;
 }

@@ -1,22 +1,22 @@
 <template lang="pug">
 v-row#settings
   v-col(cols="12")
-    h1.text-center 設定
+    .line
+    h1.text-center SETTINGS
   v-col(cols="12")
-    | 選擇的鈴聲 ID {{ selectedAlarm }}
-    v-table
+    v-table.scrollable
       thead
         tr
-          th.text-center 名稱
-          th.text-center 試聽鈴聲
-          th.text-center 選擇
+          th.text-center Name
+          th.text-center Rings
+          th.text-center Option
       tbody
         tr(v-for="alarm in alarms")
-          td {{ alarm.name }}
-          td
+          td.text-center {{ alarm.name }}
+          td.text-center
             audio(controls :src="alarm.file")
           td
-            v-radio(v-model="selectedAlarm" :value="alarm.id")
+            v-radio.d-inline-block( color="#d03c21" v-model="selectedAlarm" :value="alarm.id")
             //- v-radio(v-model="settings.selectedAlarm" :value="alarm.id")不解構pinia的做法
 </template>
 
