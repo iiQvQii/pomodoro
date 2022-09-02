@@ -1,2 +1,2 @@
 # Pomodoro 番茄鐘
-趕工期末專題加加油
+使用 Vue 製作，Vuetify 切版。
